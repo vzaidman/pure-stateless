@@ -4,7 +4,7 @@ var memoize = require('lodash/memoize')
 
 var memoizedRendersMap = new Map()
 
-module.exports = function createPureStatelessComponent(statelessComponent) {
+module.exports = function createPureStatelessComponentMemoized(statelessComponent) {
   if (typeof statelessComponent === 'function') {
     statelessComponent = {
       displayName: statelessComponent.name,
