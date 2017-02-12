@@ -10,7 +10,6 @@ const SomeChildComponent = createPureStatelessComponent({
   },
   render({ value, handleClick }) {
     const onClick = e => {
-      e.preventDefault()
       handleClick(value)
     }
     return (

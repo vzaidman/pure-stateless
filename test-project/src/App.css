@@ -1,6 +1,8 @@
 .simple-button{
   width: 100px;
-  height: 30px;
-  background-color: red;
+  background-color: #eee;
+  user-select: none;
   margin: 30px;
+  padding: 10px;
+  cursor: pointer;
 }
