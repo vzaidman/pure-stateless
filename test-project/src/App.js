@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import createPureStatelessComponent from '../../index'
+import PureStateLessComponentMemoized from '../../index-memoized'
 import './App.css'
 
-const SomeChildComponent = createPureStatelessComponent({
+const PureStateLessComponent = createPureStatelessComponent({
   displayName: 'MyStatelessComponent',
   propTypes: {
     value: PropTypes.string.isRequired,
@@ -21,6 +22,20 @@ const SomeChildComponent = createPureStatelessComponent({
     );
   }
 })
+
+const StateLessComponent = ({ value, handleClick }) => {
+    console.log('onClick function created.')
+    const onClick = e => {
+        handleClick(value)
+    }
+
+    return (
+        <div onClick={onClick} className='simple-button'>
+            {`Click Here ${value}`}
+        </div>
+    );
+}
+
 
 class App extends Component {
   state = {
