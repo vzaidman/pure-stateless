@@ -1,7 +1,21 @@
 import React, { Component, PropTypes } from 'react'
+import {pure} from 'recompose'
 import createPureStatelessComponent from '../../index'
-import PureStateLessComponentMemoized from '../../index-memoized'
+import createPureStateLessComponentMemoized from '../../index-memoized'
 import './App.css'
+
+const StateLessComponent = ({ value, handleClick }) => {
+    console.log('StateLessComponent render')
+    const onClick = e => {
+        handleClick(value)
+    }
+
+    return (
+        <div onClick={onClick} className='simple-button'>
+            {`Test ${value}`}
+        </div>
+    );
+}
 
 const PureStateLessComponent = createPureStatelessComponent({
   displayName: 'MyStatelessComponent',
@@ -10,32 +24,51 @@ const PureStateLessComponent = createPureStatelessComponent({
     handleClick: PropTypes.func.isRequired
   },
   render({ value, handleClick }) {
-    console.log('onClick function created.')
+    console.log('PureStateLessComponent render.')
     const onClick = e => {
       handleClick(value)
     }
 
     return (
       <div onClick={onClick} className='simple-button'>
-        {`Click Here ${value}`}
+        {`Test ${value}`}
       </div>
     );
   }
 })
 
-const StateLessComponent = ({ value, handleClick }) => {
-    console.log('onClick function created.')
+const PureStateLessComponentMemoized = createPureStateLessComponentMemoized({
+    displayName: 'MyStatelessComponentMemoized',
+    propTypes: {
+        value: PropTypes.string.isRequired,
+        handleClick: PropTypes.func.isRequired
+    },
+    render({ value, handleClick }) {
+        console.log('PureStateLessComponentMemoized render')
+        const onClick = e => {
+            handleClick(value)
+        }
+
+        return (
+            <div onClick={onClick} className='simple-button'>
+                {`Test ${value}`}
+            </div>
+        );
+    }
+})
+
+const RecomposePureStateLessComponent = pure(({ value, handleClick }) => {
+    console.log('RecomposePureStateLessComponent render')
     const onClick = e => {
         handleClick(value)
     }
 
     return (
         <div onClick={onClick} className='simple-button'>
-            {`Click Here ${value}`}
+            {`Test ${value}`}
         </div>
     );
-}
-
+})
 
 class App extends Component {
   state = {
@@ -53,13 +86,22 @@ class App extends Component {
 
     return (
       <div>
-        {['a', 'b', 'c'].map((value, index) =>
-          <SomeChildComponent
-            key={index}
-            value={value}
+          <StateLessComponent
+            value={'StateLessComponent'}
             handleClick={this.handleClick}
           />
-        )}
+          <PureStateLessComponent
+            value={'PureStateLessComponent'}
+            handleClick={this.handleClick}
+          />
+          <PureStateLessComponentMemoized
+            value={'PureStateLessComponentMemoized'}
+            handleClick={this.handleClick}
+          />
+          <RecomposePureStateLessComponent
+            value={'PureStateLessComponent'}
+            handleClick={this.handleClick}
+          />
         <div key="clicked-divs">{clickedDivs}</div>
       </div>
     )
