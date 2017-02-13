@@ -51,13 +51,19 @@ const PureStateLessComponent = pureStateless({
   },
   
   //optional
-  statelessWillMount: self => {
-    // the onClick handler will be created only once
+  statelessWillMount: (self, props, context) => {
+    // the onClick handler will be created only once.
     self.onClick = e => {
       const {handleClick, index} = self.props
       handleClick(index)
     }
   },
+  
+  // optional: if 'statelessWillMount' returns,
+  //           the return is assigned on 'self'.
+  statelessWillMount: (self, {handleClick, index}, context) => ({
+    onClick: e => handleClick(index)
+  }),
   
   //mandatory
   render: (self, {value}) => {
@@ -68,6 +74,11 @@ const PureStateLessComponent = pureStateless({
     )
   }
 })
+```
+
+or pass a simple stateless component:
+```javascript
+const PureStateLessComponent = pureStateless(StateLessComponent)
 ```
 
 Then a component is created and can be used as a regular react component:
