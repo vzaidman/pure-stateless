@@ -1,6 +1,6 @@
 {
   "name": "pure-stateless",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Pure Stateless React Components",
   "main": "index.js",
   "repository": "vzaidman/react-pure-stateless-component",
