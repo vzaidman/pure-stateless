@@ -1,5 +1,6 @@
 var createClass = require('react').createClass
 var shallowEqual = require('fbjs/lib/shallowEqual')
+var noop = function(){}
 
 module.exports = function pureStateless(statelessComponent) {
   if (typeof statelessComponent === 'function') {
@@ -11,6 +12,8 @@ module.exports = function pureStateless(statelessComponent) {
     }
   }
 
+  const statelessWillMount = statelessComponent.statelessWillMount || noop
+
   return createClass({
     displayName: statelessComponent.displayName,
     propTypes: statelessComponent.propTypes,
@@ -19,7 +22,7 @@ module.exports = function pureStateless(statelessComponent) {
       return !shallowEqual(this.props, nextProps)
     },
     componentWillMount: function(){
-      const result = statelessComponent.statelessWillMount(this, this.props, this.context)
+      const result = statelessWillMount(this, this.props, this.context)
       result && Object.assign(this, result)
     },
     render: function() {
