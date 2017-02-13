@@ -10,27 +10,19 @@ module.exports = function pureStateless(statelessComponent) {
       render: statelessComponent,
     }
   }
-  else{
-    statelessComponent = Object.assign({}, statelessComponent)
-  }
 
-  const statelessWillMount = statelessComponent.statelessWillMount
-  delete statelessComponent.statelessWillMount
-
-  const classSpecifications = Object.assign(
-    statelessComponent,
-    {
-      shouldComponentUpdate: function(nextProps) {
-        return !shallowEqual(this.props, nextProps)
-      },
-      componentWillMount: function(){
-        statelessWillMount(this)
-      },
-      render: function() {
-        return statelessComponent.render(this, this.props, this.context)
-      }
+  return createClass({
+    displayName: statelessComponent.displayName,
+    propTypes: statelessComponent.propTypes,
+    contextTypes: statelessComponent.contextTypes,
+    shouldComponentUpdate: function(nextProps) {
+      return !shallowEqual(this.props, nextProps)
+    },
+    componentWillMount: function(){
+      statelessComponent.statelessWillMount(this)
+    },
+    render: function() {
+      return statelessComponent.render(this, this.props, this.context)
     }
-  )
-
-  return createClass(classSpecifications)
+  })
 };
