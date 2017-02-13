@@ -1,9 +1,12 @@
-# react-pure-stateless-component POC
+# pure-stateless - Simple and fast React components
 
-Based on [christophehurpeau/react-pure-stateless-component](https://github.com/christophehurpeau/react-pure-stateless-component). Thanks.
+Based on [christophehurpeau/react-pure-stateless-component](https://github.com/christophehurpeau/react-pure-stateless-component). Thanks :)
 
-## POC
-This is an attempt to improve stateless components creation so it will be called only once.
+## Installation
+`npm install pure-stateless -save`
+
+## About
+This library allows you to create simple React pure stateless components with a creator function that runs only one.
 
 ```javascript
 const PureStateLessComponent = pureStateless({
