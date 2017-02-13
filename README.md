@@ -51,7 +51,7 @@ const PureStateLessComponent = pureStateless({
   },
   
   //optional
-  statelessWillMount: self => { //optional
+  statelessWillMount: self => {
     // the onClick handler will be created only once
     self.onClick = e => {
       const {handleClick, index} = self.props
