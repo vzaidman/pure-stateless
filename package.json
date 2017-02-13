@@ -1,24 +1,26 @@
 {
   "name": "react-pure-stateless-component",
-  "version": "0.2.1",
-  "description": "Pure React stateless component",
+  "version": "0.3",
+  "description": "Pure React stateless component - POC",
   "main": "index.js",
   "scripts": {
     "release": "pob-repository-check-clean && pob-release",
     "preversion": "pob-repository-check-clean",
     "version": "pob-version"
   },
-  "repository": "christophehurpeau/react-pure-stateless-component",
+  "repository": "vzaidman/react-pure-stateless-component",
   "keywords": [
     "react",
-    "stateless-component"
+    "stateless-component",
+    "pure",
+    "POC"
   ],
-  "author": "Christophe Hurpeau <christophe@hurpeau.com>",
+  "author": "Vitalik Zaidman <vzaidman@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/christophehurpeau/react-pure-stateless-component/issues"
+    "url": "https://github.com/vzaidman/react-pure-stateless-component/issues"
   },
-  "homepage": "https://github.com/christophehurpeau/react-pure-stateless-component#readme",
+  "homepage": "https://github.com/vzaidman/react-pure-stateless-component#readme",
   "peerDependencies": {
     "react": "^15.3.0"
   },
