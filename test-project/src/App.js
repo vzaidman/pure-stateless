@@ -30,7 +30,11 @@ const RecomposePureStateLessComponent = pure(({value, index, handleClick}) => {
 const PureStateLessComponent = pureStateless({
   statelessWillMount: self => {
     console.log('PureStateLessComponent creating onClick.')
-    self.onClick = e => self.props.handleClick(self.props.index)
+    // the onClick handler will be created only once
+    self.onClick = e => {
+      const {handleClick, index} = self.props
+      handleClick(index)
+    }
   },
   render: (self, {value}) => {
     return (

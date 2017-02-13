@@ -1,76 +1,99 @@
-# react-pure-stateless-component [![NPM version][npm-image]][npm-url]
+# react-pure-stateless-component POC
 
-Pure React stateless component
+Based on [christophehurpeau/react-pure-stateless-component](https://github.com/christophehurpeau/react-pure-stateless-component). Thanks.
 
-[![Dependency Status][daviddm-image]][daviddm-url]
+## POC
+This is an attempt to improve stateless components creation so it will be called only once.
 
-## Why this package ?
-
-A React component's render function is "pure" when it renders the same result given the same props and state.
-You can use this for a performance boost in some cases.
-
-Under the hood, this wrap the stateless component into a class component implementing `shouldComponentUpdate`, 
-in which it shallowly compares the current props with the next one and returns false if the equalities pass.
-
-## Stateless components are not pure ?
-
-Not always. That's why react can't do pure optimisations by default on them.
-
-Exemple of a unpure stateless component:
-
-```js
-const Clock = () => <div>{Date.time()}</div>
-```
-
-An unpure component can also be called inside a stateless component.
-
-## Install
-
-```sh
-npm install --save react-pure-stateless-component
-```
-
-## How to use
-
-```js
-import React, { PropTypes } from 'react';
-import createPureStatelessComponent from 'react-pure-stateless-component';
-
-export default createPureStatelessComponent({
-    displayName: 'MyStatelessComponent',
-
-    propTypes: { 
-        i: PropTypes.number, 
-    },
-    
-    render({ i }) {
-        return <div>{i}</div>;
+```javascript
+const PureStateLessComponent = pureStateless({
+  statelessWillMount: self => {
+    // the onClick handler will be created only once
+    self.onClick = e => {
+      const {handleClick, index} = self.props
+      handleClick(index)
     }
-});
+  },
+  render: (self, {value}) => {
+    return (
+      <div onClick={self.onClick} className='simple-button'>
+        {`PureStateLessComponent: ${value}`}
+      </div>
+    )
+  }
+})
 ```
 
-You can also pass a existing stateless component:
-
-```js
-import React, { PropTypes } from 'react';
-import createPureStatelessComponent from 'react-pure-stateless-component';
-
-
-MyStatelessComponent.propTypes = { i: PropTypes.number };
-
-function MyStatelessComponent({ i }) {
-  return <div>{i}</div>;
+As opposed to the standard stateless component (with or without [recompose's pure](https://github.com/acdlite/recompose/blob/master/docs/API.md#pure))
+```javascript
+//@pure
+const StateLessComponent = ({value, index, handleClick}) => {
+  const onClick = e => handleClick(index) //this will be created every render.
+  return (
+    <div onClick={onClick} className='simple-button'>
+      {`StateLessComponent: ${value}`}
+    </div>
+  );
 }
-
-export default createPureStatelessComponent(MyStatelessComponent);
 ```
 
-## Similar libraries
+## Usage
+```javascript
+const PureStateLessComponent = pureStateless({
+  //optional
+  displayName: 'MyComponent',
+  
+  //optional
+  propTypes: {
+    handleClick: React.Proptypes.func.isRequired,
+    index: React.Proptypes.number.isRequired,
+    value: React.Proptypes.string.isRequired
+  },
+  
+  //optional
+  statelessWillMount: self => { //optional
+    // the onClick handler will be created only once
+    self.onClick = e => {
+      const {handleClick, index} = self.props
+      handleClick(index)
+    }
+  },
+  
+  //mandatory
+  render: (self, {value}) => {
+    return (
+      <div onClick={self.onClick} className='simple-button'>
+        {`PureStateLessComponent: ${value}`}
+      </div>
+    )
+  }
+})
+```
 
-- [react-pure-stateless](https://www.npmjs.com/package/react-pure-stateless)
+Then a component is created and can be used as a regular react component:
+```javascript
+  ///...
+  render(){
+    return (
+      <div>
+        {array.map((value, index) =>
+          <PureStateLessComponent
+            key={index}
+            value={value}
+            onClick={this.props.onClick}
+          />
+        )}
+      </div>
+    )
+  }
+```
 
+## Motivation
+Eliminating stateless pure components creation code may be useful where it might change many times and we want this code to only run once.
 
-[npm-image]: https://img.shields.io/npm/v/react-pure-stateless-component.svg?style=flat-square
-[npm-url]: https://npmjs.org/package/react-pure-stateless-component
-[daviddm-image]: https://david-dm.org/christophehurpeau/react-pure-stateless-component.svg?style=flat-square
-[daviddm-url]: https://david-dm.org/christophehurpeau/react-pure-stateless-component
+//TODO: an example is needed.
+
+## Testing
+`cd test-project`
+`yarn install`
+`yarn start`
