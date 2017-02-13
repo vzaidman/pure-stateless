@@ -1,6 +1,6 @@
 {
   "name": "pure-stateless",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Pure Stateless React Components",
   "main": "index.js",
   "repository": "vzaidman/react-pure-stateless-component",
@@ -10,7 +10,7 @@
     "pure",
     "POC"
   ],
-  "author": "Vitalik Zaidman <vzaidman@gmail.com>",
+  "author": "Christophe Hurpeau <christophe@hurpeau.com>, Vitalik Zaidman <vzaidman@gmail.com>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/vzaidman/react-pure-stateless-component/issues"
