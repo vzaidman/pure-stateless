@@ -91,9 +91,11 @@ Then a component is created and can be used as a regular react component:
 ## Motivation
 Eliminating stateless pure components creation code may be useful where it might change many times and we want this code to only run once.
 
-//TODO: an example is needed.
+`//TODO: create an example of when this is needed.`
 
 ## Testing
 `cd test-project`
+
 `yarn install`
+
 `yarn start`
