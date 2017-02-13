@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {pure} from 'recompose'
-import createPureStatelessComponent from '../../index'
+import pureStateless from '../../index'
 import './App.css'
 
 const StateLessComponent = ({value, index, handleClick}) => {
@@ -27,7 +27,7 @@ const RecomposePureStateLessComponent = pure(({value, index, handleClick}) => {
   );
 })
 
-const PureStateLessComponent = createPureStatelessComponent({
+const PureStateLessComponent = pureStateless({
   statelessWillMount: self => {
     console.log('PureStateLessComponent creating onClick.')
     self.onClick = e => self.props.handleClick(self.props.index)

@@ -1,7 +1,7 @@
 var createClass = require('react').createClass
 var shallowEqual = require('fbjs/lib/shallowEqual')
 
-module.exports = function createPureStatelessComponent(statelessComponent) {
+module.exports = function pureStateless(statelessComponent) {
   if (typeof statelessComponent === 'function') {
     statelessComponent = {
       displayName: statelessComponent.name,
