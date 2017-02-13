@@ -4,16 +4,16 @@ import createPureStatelessComponent from '../../index'
 import createPureStateLessComponentMemoized from '../../index-memoized'
 import './App.css'
 
-const StateLessComponent = ({ value, handleClick }) => {
+const StateLessComponent = ({ value, index, handleClick }) => {
     console.log('StateLessComponent render')
     const onClick = e => {
-        handleClick(value)
+        handleClick(index)
     }
 
     return (
-        <div onClick={onClick} className='simple-button'>
-            {`Test ${value}`}
-        </div>
+      <div onClick={onClick} className='simple-button'>
+        {`StateLessComponent: ${value}`}
+      </div>
     );
 }
 
@@ -21,17 +21,18 @@ const PureStateLessComponent = createPureStatelessComponent({
   displayName: 'MyStatelessComponent',
   propTypes: {
     value: PropTypes.string.isRequired,
+    index: PropTypes.number.isRequired,
     handleClick: PropTypes.func.isRequired
   },
-  render({ value, handleClick }) {
+  render({ value, index, handleClick }) {
     console.log('PureStateLessComponent render.')
     const onClick = e => {
-      handleClick(value)
+      handleClick(index)
     }
 
     return (
       <div onClick={onClick} className='simple-button'>
-        {`Test ${value}`}
+        {`PureStateLessComponent: ${value}`}
       </div>
     );
   }
@@ -40,69 +41,74 @@ const PureStateLessComponent = createPureStatelessComponent({
 const PureStateLessComponentMemoized = createPureStateLessComponentMemoized({
     displayName: 'MyStatelessComponentMemoized',
     propTypes: {
-        value: PropTypes.string.isRequired,
-        handleClick: PropTypes.func.isRequired
+      value: PropTypes.string.isRequired,
+      index: PropTypes.number.isRequired,
+      handleClick: PropTypes.func.isRequired
     },
-    render({ value, handleClick }) {
+    render({ value, index, handleClick }) {
         console.log('PureStateLessComponentMemoized render')
         const onClick = e => {
-            handleClick(value)
+            handleClick(index)
         }
 
         return (
             <div onClick={onClick} className='simple-button'>
-                {`Test ${value}`}
+                {`PureStateLessComponentMemoized: ${value}`}
             </div>
         );
     }
 })
 
-const RecomposePureStateLessComponent = pure(({ value, handleClick }) => {
+const RecomposePureStateLessComponent = pure(({ value, index, handleClick }) => {
     console.log('RecomposePureStateLessComponent render')
     const onClick = e => {
-        handleClick(value)
+        handleClick(index)
     }
 
     return (
-        <div onClick={onClick} className='simple-button'>
-            {`Test ${value}`}
-        </div>
+      <div onClick={onClick} className='simple-button'>
+        {`RecomposePureStateLessComponent: ${value}`}
+      </div>
     );
 })
 
 class App extends Component {
   state = {
-    clickedDivs: ''
+    clickCount: [0, 0, 0, 0]
   }
 
-  handleClick = (value) => {
-    const {clickedDivs} = this.state
-    const separator = !clickedDivs ? '' : ', '
-    this.setState({clickedDivs: clickedDivs + separator + value})
+  handleClick = (index) => {
+    const {clickCount} = this.state
+    const newClickCount = [...clickCount]
+    newClickCount[index] += 1
+    this.setState({clickCount: newClickCount})
   }
 
   render() {
-    const {clickedDivs} = this.state
+    const {clickCount} = this.state
 
     return (
       <div>
           <StateLessComponent
-            value={'StateLessComponent'}
+            value={clickCount[0]}
             handleClick={this.handleClick}
+            index={0}
           />
           <PureStateLessComponent
-            value={'PureStateLessComponent'}
+            value={clickCount[1]}
             handleClick={this.handleClick}
+            index={1}
           />
           <PureStateLessComponentMemoized
-            value={'PureStateLessComponentMemoized'}
+            value={clickCount[2]}
             handleClick={this.handleClick}
+            index={2}
           />
           <RecomposePureStateLessComponent
-            value={'PureStateLessComponent'}
+            value={clickCount[3]}
             handleClick={this.handleClick}
+            index={3}
           />
-        <div key="clicked-divs">{clickedDivs}</div>
       </div>
     )
   }
