@@ -3,10 +3,10 @@
 Based on [christophehurpeau/react-pure-stateless-component](https://github.com/christophehurpeau/react-pure-stateless-component). Thanks :)
 
 ## Installation
-`npm install pure-stateless -save`
+`npm install pure-stateless --save`
 
 ## About
-This library allows you to create simple React pure stateless components with a creator function that runs only one.
+This library allows you to create simple React pure stateless components with a creator function that runs only once.
 
 ```javascript
 const PureStateLessComponent = pureStateless({
