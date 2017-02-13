@@ -5,7 +5,7 @@ import './App.css'
 
 const StateLessComponent = ({value, index, handleClick}) => {
 
-  console.log('StateLessComponent (not the pure once) creating onClick.')
+  console.log('StateLessComponent (not the stateless pure one) creating onClick.')
   const onClick = e => handleClick(index)
 
   return (
