@@ -19,7 +19,8 @@ module.exports = function pureStateless(statelessComponent) {
       return !shallowEqual(this.props, nextProps)
     },
     componentWillMount: function(){
-      statelessComponent.statelessWillMount(this)
+      const result = statelessComponent.statelessWillMount(this, this.props, this.context)
+      result && Object.assign(this, result)
     },
     render: function() {
       return statelessComponent.render(this, this.props, this.context)

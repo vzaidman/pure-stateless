@@ -5,7 +5,7 @@ import './App.css'
 
 const StateLessComponent = ({value, index, handleClick}) => {
 
-  console.log('StateLessComponent creating onClick.')
+  console.log('StateLessComponent (not the pure once) creating onClick.')
   const onClick = e => handleClick(index)
 
   return (
@@ -28,14 +28,10 @@ const RecomposePureStateLessComponent = pure(({value, index, handleClick}) => {
 })
 
 const PureStateLessComponent = pureStateless({
-  statelessWillMount: self => {
-    console.log('PureStateLessComponent creating onClick.')
-    // the onClick handler will be created only once
-    self.onClick = e => {
-      const {handleClick, index} = self.props
-      handleClick(index)
-    }
-  },
+  // the onClick handler will be created only once
+  statelessWillMount: (self, {handleClick, index}) => ({
+    onClick: e => handleClick(index)
+  }),
   render: (self, {value}) => {
     return (
       <div onClick={self.onClick} className='simple-button'>

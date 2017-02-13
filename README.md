@@ -10,13 +10,10 @@ This library allows you to create simple React pure stateless components with a 
 
 ```javascript
 const PureStateLessComponent = pureStateless({
-  statelessWillMount: self => {
-    // the onClick handler will be created only once
-    self.onClick = e => {
-      const {handleClick, index} = self.props
-      handleClick(index)
-    }
-  },
+  // the onClick handler will be created only once
+  statelessWillMount: (self, {handleClick, index}) => ({
+    onClick: e => handleClick(index)
+  }),
   render: (self, {value}) => {
     return (
       <div onClick={self.onClick} className='simple-button'>
