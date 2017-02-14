@@ -1,31 +1,17 @@
 var createClass = require('react').createClass
 var shallowEqual = require('fbjs/lib/shallowEqual')
 
-module.exports = function pureStateless(statelessComponent) {
-  if (typeof statelessComponent === 'function') {
-    statelessComponent = {
-      displayName: statelessComponent.name,
-      propTypes: statelessComponent.propTypes,
-      contextTypes: statelessComponent.contextTypes,
-      render: statelessComponent,
-    }
-  }
-
+module.exports = function pureStateless(generator) {
   return createClass({
-    displayName: statelessComponent.displayName,
-    propTypes: statelessComponent.propTypes,
-    contextTypes: statelessComponent.contextTypes,
-    shouldComponentUpdate: function(nextProps) {
+    shouldComponentUpdate(nextProps) {
       return !shallowEqual(this.props, nextProps)
     },
-    componentWillMount: !statelessComponent.statelessWillMount ?
-      undefined :
-      function(){
-        const result = statelessComponent.statelessWillMount(this, this.props, this.context)
-        result && Object.assign(this, result)
-      },
-    render: function() {
-      return statelessComponent.render(this, this.props, this.context)
+    componentWillMount(){
+      this.handlers = {}
+      this.statelessRender = generator(this.handlers, this.props, this.context)
+    },
+    render(){
+      return this.statelessRender(this.handlers, this.props, this.context)
     }
   })
-};
+}
