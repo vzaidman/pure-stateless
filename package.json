@@ -1,6 +1,6 @@
 {
   "name": "pure-stateless",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Simple and Fast React Components",
   "main": "index.js",
   "repository": "vzaidman/pure-stateless",
@@ -13,9 +13,9 @@
   "author": "Christophe Hurpeau <christophe@hurpeau.com>, Vitalik Zaidman <vzaidman@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/vzaidman/react-pure-stateless-component/issues"
+    "url": "https://github.com/vzaidman/pure-stateless/issues"
   },
-  "homepage": "https://github.com/vzaidman/react-pure-stateless-component#readme",
+  "homepage": "https://github.com/vzaidman/pure-stateless#readme",
   "peerDependencies": {
     "react": "^15.4.2"
   }
