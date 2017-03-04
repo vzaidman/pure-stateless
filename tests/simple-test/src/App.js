@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import pureStateless from '../../index'
+import pureStateless from '../../../index'
 import './App.css'
 
 const PureStateLessComponent = pureStateless((handlers, {handleClick, index}) => {

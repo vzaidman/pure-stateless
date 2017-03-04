@@ -27,7 +27,7 @@ class App extends PureComponent {
     const {currentIndex} = this.state
     return (
       <div className='parent'>
-        {_.times(1000, n =>
+        {_.times(5000, n =>
           <ColorfulChild
             key={n}
             index={n}

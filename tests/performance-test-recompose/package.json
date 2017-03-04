@@ -9,7 +9,8 @@
     "lodash": "^4.17.4",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
-    "recompose": "^0.22.0"
+    "recompose": "^0.22.0",
+    "stats.js": "^0.17.0"
   },
   "scripts": {
     "start": "react-scripts start",

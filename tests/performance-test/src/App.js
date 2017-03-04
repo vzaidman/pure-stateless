@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react'
 import _ from 'lodash'
-import pureStateless from '../../index'
+import pureStateless from '../../../index'
 import './App.css'
 
 const ColorfulChild = pureStateless((handlers, {handleMouseOver, index}) => {
@@ -24,7 +24,7 @@ class App extends PureComponent {
     const {currentIndex} = this.state
     return (
       <div className='parent'>
-        {_.times(1000, n =>
+        {_.times(5000, n =>
           <ColorfulChild
             key={n}
             index={n}
