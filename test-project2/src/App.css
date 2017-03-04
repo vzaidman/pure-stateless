@@ -1,0 +1,33 @@
+html, body{
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body * {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+#root{
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+.parent{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.colorful-child{
+  margin: 0;
+  padding: 0;
+  height: 300px;
+  flex: 1;
+  background-color: black;
+}
