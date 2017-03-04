@@ -67,10 +67,10 @@ Then a component is created and can be used as a regular react component:
 ```
 
 ## Motivation
-If you need a minimalistic library that provides you with pure stateless library with handlers.
+If you need a minimalistic library that provides you with pure stateless components with handlers.
 
-[Recompose](https://github.com/acdlite/recompose/blob/master/docs/API.md) provides you with the same features but can be too heavy
-if an [optimization](https://github.com/acdlite/recompose#optimizing-bundle-size) can't be used
+[Recompose](https://github.com/acdlite/recompose/blob/master/docs/API.md) includes the same features and many more
+but can be too heavy if an [optimization](https://github.com/acdlite/recompose#optimizing-bundle-size) can't be used
 on it.
 
 ## Testing
