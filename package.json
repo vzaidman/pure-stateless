@@ -1,9 +1,9 @@
 {
   "name": "pure-stateless",
   "version": "2.0.0",
-  "description": "Pure Stateless React Components",
+  "description": "Simple and Fast React Components",
   "main": "index.js",
-  "repository": "vzaidman/react-pure-stateless-component",
+  "repository": "vzaidman/pure-stateless",
   "keywords": [
     "react",
     "stateless-component",

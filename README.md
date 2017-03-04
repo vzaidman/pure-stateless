@@ -6,8 +6,9 @@ Based on [christophehurpeau/react-pure-stateless-component](https://github.com/c
 `npm install pure-stateless --save`
 
 ## About
-This is a *minimalist* library for creating react pure stateless components with a creator function that runs only once.
-For more advanced features use [recompose](https://github.com/acdlite/recompose/blob/master/docs/API.md)
+This is a <b>*minimalistic*</b> library for creating react pure stateless components, with a creator function that runs only once.
+
+For more advanced features use [recompose](https://github.com/acdlite/recompose).
 
 ```javascript
 import pureStateless from 'pure-stateless'
@@ -74,6 +75,10 @@ on it.
 
 ## Testing
 `cd tests\simple-test`
+or
+`cd tests\performance-test`
+or
+`cd tests\performance-test-recompose`
 
 `yarn install`
 
